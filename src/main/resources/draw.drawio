@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-07-14T03:12:23.645Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="FEx7xXizHdSPhf5fodtY" version="20.1.1" type="github">
+<mxfile host="app.diagrams.net" modified="2022-07-14T03:14:25.017Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="wSutAIYHG8gcPtcXghqY" version="20.1.1" type="github">
   <diagram id="5q5c3lRfItl9dn9ke-sF" name="Page-1">
     <mxGraphModel dx="782" dy="436" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -7,7 +7,7 @@
         <mxCell id="MqyLW4L-psCNU-2SYsgu-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="MqyLW4L-psCNU-2SYsgu-1" target="MqyLW4L-psCNU-2SYsgu-2" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="MqyLW4L-psCNU-2SYsgu-1" value="录入任务" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="MqyLW4L-psCNU-2SYsgu-1" value="录入任务(task_name、point、user)" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="255" y="250" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="MqyLW4L-psCNU-2SYsgu-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="MqyLW4L-psCNU-2SYsgu-2" target="MqyLW4L-psCNU-2SYsgu-5" edge="1">
@@ -70,8 +70,7 @@
         <mxCell id="YdHMnDvvrbWeLoP-S1ga-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.85;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="MqyLW4L-psCNU-2SYsgu-27" target="MqyLW4L-psCNU-2SYsgu-4">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="355" y="780" />
-              <mxPoint x="355" y="832" />
+              <mxPoint x="190" y="832" />
             </Array>
           </mxGeometry>
         </mxCell>
