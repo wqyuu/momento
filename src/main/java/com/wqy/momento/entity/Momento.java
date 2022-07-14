@@ -1,47 +1,24 @@
 package com.wqy.momento.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
-import java.time.LocalDateTime;
 
 @Data
 @TableName("momento")
-public class Momento  {
-    /**
-     * 租户号
-     */
-    private String tenantId;
-    /**
-     * 乐观锁
-     */
-    private String revision;
-    /**
-     * 创建人
-     */
-    private String createdBy;
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createdTime;
-    /**
-     * 更新人
-     */
-    private String updatedBy;
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updatedTime;
+public class Momento  extends  BaseEntity {
+
     /**
      * ID
      */
-    @TableId
-    private String id;
+    @TableId(type = IdType.AUTO)
+    private Integer id;
     /**
      * 内容
      */
-    private byte[] content;
+    private String content;
     /**
      * 标题
      */
@@ -58,4 +35,6 @@ public class Momento  {
      * 来源
      */
     private String source;
+
+
 }

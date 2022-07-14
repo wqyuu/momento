@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wqy.momento.MomentoApplication;
 import com.wqy.momento.entity.Config;
+import org.hashids.Hashids;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,5 +63,16 @@ class ConfigMapperTest {
     void select(){
         Config config = configMapper.selectById(1);
         System.out.println(config);
+    }
+
+    @Test
+    void test_hashids_encode_method() {
+        final String SALT = "this is my salt";
+        final int MIN_HASH_LENGTH = 11;
+
+        Hashids hashids = new Hashids(SALT, MIN_HASH_LENGTH);
+        String encryptString = hashids.encode(347L);
+
+        System.out.println(encryptString); // Y5bAyr8dLO4
     }
 }

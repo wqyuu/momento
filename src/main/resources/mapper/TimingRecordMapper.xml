@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wqy.momento.mapper.TimingRecordMapper">
+     <select id="selectByPage" resultType="com.wqy.momento.entity.TimingRecord">
+        select * from timing_record ${ew.customSqlSegment}
+    </select>
+
+    <select id="selectUser" resultType="com.wqy.momento.entity.vo.TimingRecordResp" >
+        select t.name,o.point,o.degree,o.type,o.point_change,o.finish_time
+        from timing_record o
+        left join timing t
+        on o.timing_code = t.code
+        <where>
+            <if test="createdBy != null and createdBy !=''">
+                and o.created_by = #{createdBy}
+            </if>
+            <if test="type != null and type !=''">
+                and o.type = #{type}
+            </if>
+            <if test="code != null and code !=''">
+                and o.timing_code = #{code}
+            </if>
+        </where>
+        order by o.finish_time  desc
+    </select>
+</mapper>

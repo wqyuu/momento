@@ -2,12 +2,12 @@ package com.wqy.momento.controller;
 
 import java.util.List;
 
+import com.wqy.momento.config.MomentResponse;
 import com.wqy.momento.entity.Tag;
 import com.wqy.momento.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
  /**
@@ -28,8 +28,8 @@ public class TagController{
      * @return 实例对象
      */
     @GetMapping("{id}")
-    public ResponseEntity<Tag> queryById(String id){
-        return ResponseEntity.ok(tagService.queryById(id));
+    public MomentResponse<Tag> queryById(String id){
+        return  MomentResponse.ok(tagService.queryById(id));
     }
     
     /** 
@@ -40,7 +40,7 @@ public class TagController{
      * @return 查询结果
      */
     @GetMapping
-    public ResponseEntity<PageImpl<Tag>> paginQuery(Tag tag, PageRequest pageRequest){
+    public MomentResponse<PageImpl<Tag>> paginQuery(Tag tag, PageRequest pageRequest){
         //1.分页参数
         long current = pageRequest.getPageNumber();
         long size = pageRequest.getPageSize();
@@ -51,7 +51,7 @@ public class TagController{
         List<Tag> dataList = pageResult.getRecords();
         long total = pageResult.getTotal();
         PageImpl<Tag> retPage = new PageImpl<Tag>(dataList,pageRequest,total);
-        return ResponseEntity.ok(retPage);
+        return  MomentResponse.ok(retPage);
     }
     
     /** 
@@ -61,8 +61,8 @@ public class TagController{
      * @return 实例对象
      */
     @PostMapping
-    public ResponseEntity<Tag> add(Tag tag){
-        return ResponseEntity.ok(tagService.insert(tag));
+    public MomentResponse<Tag> add(Tag tag){
+        return  MomentResponse.ok(tagService.insert(tag));
     }
     
     /** 
@@ -72,8 +72,8 @@ public class TagController{
      * @return 实例对象
      */
     @PutMapping
-    public ResponseEntity<Tag> edit(Tag tag){
-        return ResponseEntity.ok(tagService.update(tag));
+    public MomentResponse<Tag> edit(Tag tag){
+        return  MomentResponse.ok(tagService.update(tag));
     }
     
     /** 
@@ -83,7 +83,7 @@ public class TagController{
      * @return 是否成功
      */
     @DeleteMapping
-    public ResponseEntity<Boolean> deleteById(String id){
-        return ResponseEntity.ok(tagService.deleteById(id));
+    public MomentResponse<Boolean> deleteById(String id){
+        return  MomentResponse.ok(tagService.deleteById(id));
     }
 }

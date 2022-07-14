@@ -2,12 +2,12 @@ package com.wqy.momento.controller;
 
 import java.util.List;
 
+import com.wqy.momento.config.MomentResponse;
 import com.wqy.momento.entity.Type;
 import com.wqy.momento.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -29,8 +29,8 @@ public class TypeController{
      * @return 实例对象
      */
     @GetMapping("{id}")
-    public ResponseEntity<Type> queryById(String id){
-        return ResponseEntity.ok(typeService.queryById(id));
+    public MomentResponse<Type> queryById(String id){
+        return  MomentResponse.ok(typeService.queryById(id));
     }
     
     /** 
@@ -41,7 +41,7 @@ public class TypeController{
      * @return 查询结果
      */
     @GetMapping
-    public ResponseEntity<PageImpl<Type>> paginQuery(Type type, PageRequest pageRequest){
+    public MomentResponse<PageImpl<Type>> paginQuery(Type type, PageRequest pageRequest){
         //1.分页参数
         long current = pageRequest.getPageNumber();
         long size = pageRequest.getPageSize();
@@ -52,7 +52,7 @@ public class TypeController{
         List<Type> dataList = pageResult.getRecords();
         long total = pageResult.getTotal();
         PageImpl<Type> retPage = new PageImpl<Type>(dataList,pageRequest,total);
-        return ResponseEntity.ok(retPage);
+        return  MomentResponse.ok(retPage);
     }
     
     /** 
@@ -62,8 +62,8 @@ public class TypeController{
      * @return 实例对象
      */
     @PostMapping
-    public ResponseEntity<Type> add(Type type){
-        return ResponseEntity.ok(typeService.insert(type));
+    public MomentResponse<Type> add(Type type){
+        return  MomentResponse.ok(typeService.insert(type));
     }
     
     /** 
@@ -73,8 +73,8 @@ public class TypeController{
      * @return 实例对象
      */
     @PutMapping
-    public ResponseEntity<Type> edit(Type type){
-        return ResponseEntity.ok(typeService.update(type));
+    public MomentResponse<Type> edit(Type type){
+        return  MomentResponse.ok(typeService.update(type));
     }
     
     /** 
@@ -84,7 +84,7 @@ public class TypeController{
      * @return 是否成功
      */
     @DeleteMapping
-    public ResponseEntity<Boolean> deleteById(String undefinedId){
-        return ResponseEntity.ok(typeService.deleteById(undefinedId));
+    public MomentResponse<Boolean> deleteById(String undefinedId){
+        return  MomentResponse.ok(typeService.deleteById(undefinedId));
     }
 }

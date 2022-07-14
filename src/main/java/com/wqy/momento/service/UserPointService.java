@@ -1,14 +1,14 @@
 package com.wqy.momento.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.wqy.momento.entity.Momento;
+import com.wqy.momento.entity.UserPoint;
 
-/**
- * momento;(momento)表服务接口
- * @author : wqy
- * @date : 2022-6-28
+ /**
+ * 用户积分;(user_point)表服务接口
+ * @author : http://www.chiner.pro
+ * @date : 2022-7-14
  */
-public interface MomentoService{
+public interface UserPointService{
     
     /** 
      * 通过ID查询单条数据 
@@ -16,36 +16,36 @@ public interface MomentoService{
      * @param id 主键
      * @return 实例对象
      */
-    Momento queryById(Integer id);
+    UserPoint queryById(Integer id);
     
     /**
      * 分页查询
      *
-     * @param momento 筛选条件
+     * @param userPoint 筛选条件
      * @param current 当前页码
      * @param size  每页大小
      * @return
      */
-    Page<Momento> paginQuery(Momento momento, long current, long size);
+    Page<UserPoint> paginQuery(UserPoint userPoint, long current, long size);
     /** 
      * 新增数据
      *
-     * @param momento 实例对象
+     * @param userPoint 实例对象
      * @return 实例对象
      */
-    Momento insert(Momento momento);
+    UserPoint insert(UserPoint userPoint);
     /** 
      * 更新数据
      *
-     * @param momento 实例对象
+     * @param userPoint 实例对象
      * @return 实例对象
      */
-    Momento update(Momento momento);
+    UserPoint update(UserPoint userPoint);
     /** 
      * 通过主键删除数据
      *
      * @param id 主键
      * @return 是否成功
      */
-    boolean deleteById(String id);
+    boolean deleteById(Integer id);
 }

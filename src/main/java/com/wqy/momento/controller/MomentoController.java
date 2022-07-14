@@ -2,12 +2,14 @@ package com.wqy.momento.controller;
 
 import java.util.List;
 
+import com.wqy.momento.config.MomentResponse;
 import com.wqy.momento.entity.Momento;
 import com.wqy.momento.service.MomentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
  /**
@@ -28,8 +30,8 @@ public class MomentoController{
      * @return 实例对象
      */
     @GetMapping("{id}")
-    public ResponseEntity<Momento> queryById(String id){
-        return ResponseEntity.ok(momentoService.queryById(id));
+    public MomentResponse<Momento> queryById(Integer id){
+        return  MomentResponse.ok(momentoService.queryById(id));
     }
     
     /** 
@@ -40,7 +42,8 @@ public class MomentoController{
      * @return 查询结果
      */
     @GetMapping
-    public ResponseEntity<PageImpl<Momento>> paginQuery(Momento momento, PageRequest pageRequest){
+    public MomentResponse<PageImpl<Momento>> paginQuery(Momento momento,
+                                                        @PageableDefault(sort = "createdTime", direction = Sort.Direction.ASC) Pageable pageRequest){
         //1.分页参数
         long current = pageRequest.getPageNumber();
         long size = pageRequest.getPageSize();
@@ -51,7 +54,7 @@ public class MomentoController{
         List<Momento> dataList = pageResult.getRecords();
         long total = pageResult.getTotal();
         PageImpl<Momento> retPage = new PageImpl<Momento>(dataList,pageRequest,total);
-        return ResponseEntity.ok(retPage);
+        return  MomentResponse.ok(retPage);
     }
     
     /** 
@@ -61,8 +64,8 @@ public class MomentoController{
      * @return 实例对象
      */
     @PostMapping
-    public ResponseEntity<Momento> add(Momento momento){
-        return ResponseEntity.ok(momentoService.insert(momento));
+    public MomentResponse<Momento> add(@RequestBody  Momento momento){
+        return  MomentResponse.ok(momentoService.insert(momento));
     }
     
     /** 
@@ -72,8 +75,8 @@ public class MomentoController{
      * @return 实例对象
      */
     @PutMapping
-    public ResponseEntity<Momento> edit(Momento momento){
-        return ResponseEntity.ok(momentoService.update(momento));
+    public MomentResponse<Momento> edit(@RequestBody Momento momento){
+        return  MomentResponse.ok(momentoService.update(momento));
     }
     
     /** 
@@ -83,7 +86,7 @@ public class MomentoController{
      * @return 是否成功
      */
     @DeleteMapping
-    public ResponseEntity<Boolean> deleteById(String id){
-        return ResponseEntity.ok(momentoService.deleteById(id));
+    public MomentResponse<Boolean> deleteById(String id){
+        return  MomentResponse.ok(momentoService.deleteById(id));
     }
 }

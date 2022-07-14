@@ -17,25 +17,8 @@ import java.util.Date;
 @Data
 @ApiModel(value = "配置",description = "")
 @TableName("config")
-public class Config{
-    /** 租户号 */
-    @ApiModelProperty(name = "租户号",notes = "")
-    private String tenantId ;
-    /** 乐观锁 */
-    @ApiModelProperty(name = "乐观锁",notes = "")
-    private String revision ;
-    /** 创建人 */
-    @ApiModelProperty(name = "创建人",notes = "")
-    private String createdBy ;
-    /** 创建时间 */
-    @ApiModelProperty(name = "创建时间",notes = "")
-    private Date createdTime ;
-    /** 更新人 */
-    @ApiModelProperty(name = "更新人",notes = "")
-    private String updatedBy ;
-    /** 更新时间 */
-    @ApiModelProperty(name = "更新时间",notes = "")
-    private Date updatedTime ;
+public class Config extends  BaseEntity{
+
     /** ID */
     @ApiModelProperty(name = "ID",notes = "")
     @TableId
