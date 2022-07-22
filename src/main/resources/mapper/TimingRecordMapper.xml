@@ -11,17 +11,18 @@
         from timing_record o
         left join timing t
         on o.timing_code = t.code
-        <where>
-            <if test="createdBy != null and createdBy !=''">
-                and o.created_by = #{createdBy}
-            </if>
-            <if test="type != null and type !=''">
-                and o.type = #{type}
-            </if>
-            <if test="code != null and code !=''">
-                and o.timing_code = #{code}
-            </if>
-        </where>
+        ${ew.customSqlSegment}
+<!--        <where>-->
+<!--            <if test="createdBy != null and createdBy !=''">-->
+<!--                and o.created_by = #{createdBy}-->
+<!--            </if>-->
+<!--            <if test="type != null and type !=''">-->
+<!--                and o.type = #{type}-->
+<!--            </if>-->
+<!--            <if test="code != null and code !=''">-->
+<!--                and o.timing_code = #{code}-->
+<!--            </if>-->
+<!--        </where>-->
         order by o.finish_time  desc
     </select>
 </mapper>

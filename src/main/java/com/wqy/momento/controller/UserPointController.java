@@ -19,7 +19,7 @@ import com.wqy.momento.service.UserPointService;
  */
 @Api(tags = "用户积分对象功能接口")
 @RestController
-@RequestMapping("/userPoint")
+@RequestMapping("/point")
 public class UserPointController{
     @Autowired
     private UserPointService userPointService;
@@ -96,5 +96,8 @@ public class UserPointController{
     }
 
     // 查询我的积分
-
+    @GetMapping("/user/{id}")
+    public MomentResponse<UserPoint> queryByUserId(String id){
+        return  MomentResponse.ok(userPointService.selectByUser(id));
+    }
 }

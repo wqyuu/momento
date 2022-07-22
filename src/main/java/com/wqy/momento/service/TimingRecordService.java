@@ -3,6 +3,7 @@ package com.wqy.momento.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wqy.momento.config.MomentResponse;
 import com.wqy.momento.entity.TimingRecord;
+import com.wqy.momento.entity.vo.TimingRecordResp;
 import com.wqy.momento.entity.vo.TimingRecordVO;
 
 /**
@@ -58,4 +59,14 @@ public interface TimingRecordService{
       * @return 实例对象
       */
      MomentResponse add(TimingRecordVO timingRecordVO);
+
+    /**
+     * 分页查询
+     *
+     * @param timingRecord 筛选条件
+     * @param current 当前页码
+     * @param size  每页大小
+     * @return
+     */
+    Page<TimingRecordResp> paginQueryByUser(TimingRecord timingRecord, long current, long size);
 }

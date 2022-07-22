@@ -26,8 +26,6 @@ Map -> (create_by,json)
 策略 json {"1":{"tag":"3","content":"哈哈"},"2":{}...}
 
 
-
-
 雷达图
 
 - user
@@ -36,3 +34,5 @@ Map -> (create_by,json)
 
 db
 - momento
+
+整体：注册/登录、时刻、积分、时刻记录、个人日记、笔记、收藏网上文章(链接转文字存储)、大事记

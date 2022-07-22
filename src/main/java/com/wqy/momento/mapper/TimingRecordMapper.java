@@ -25,5 +25,5 @@ public interface TimingRecordMapper  extends BaseMapper<TimingRecord>{
      */
     IPage<TimingRecord> selectByPage(IPage<TimingRecord> page , @Param(Constants.WRAPPER) Wrapper<TimingRecord> wrapper);
 
-    IPage<TimingRecordResp> selectUser(IPage<TimingRecord> page, TimingRecord record);
+    IPage<TimingRecordResp> selectUser(IPage<TimingRecord> page, @Param(Constants.WRAPPER) Wrapper<TimingRecord> wrapper);
 }

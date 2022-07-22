@@ -1,6 +1,7 @@
 package com.wqy.momento.service.impl;
 
 import cn.hutool.core.util.StrUtil;
+import com.wqy.momento.entity.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -122,4 +123,13 @@ public class UserPointServiceImpl implements UserPointService{
         int total = userPointMapper.deleteById(id);
         return total > 0;
     }
-}
+
+     @Override
+     public UserPoint selectByUser(String userId) {
+         LambdaQueryWrapper<UserPoint> queryWrapper = new LambdaQueryWrapper<>();
+         if(StrUtil.isNotBlank(userId)){
+             queryWrapper.eq(UserPoint::getUserId, userId);
+         }
+         return userPointMapper.selectOne(queryWrapper);
+     }
+ }

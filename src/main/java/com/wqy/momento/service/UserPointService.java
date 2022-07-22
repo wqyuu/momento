@@ -48,4 +48,6 @@ public interface UserPointService{
      * @return 是否成功
      */
     boolean deleteById(Integer id);
+
+    UserPoint selectByUser(String userId);
 }

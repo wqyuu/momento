@@ -3,6 +3,7 @@ package com.wqy.momento.controller;
 import java.util.List;
 
 import com.wqy.momento.config.MomentResponse;
+import com.wqy.momento.entity.vo.TimingRecordResp;
 import com.wqy.momento.entity.vo.TimingRecordVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -109,5 +110,29 @@ public class TimingRecordController{
      @PostMapping("/add")
      public MomentResponse addRecord(@RequestBody TimingRecordVO timingRecordVO){
          return  timingRecordService.add(timingRecordVO);
+     }
+
+     /**
+      * 记录分页查询
+      *
+      * @param timingRecord 筛选条件
+      * @param pageRequest 分页对象
+      * @return 查询结果
+      */
+     @ApiOperation("分页查询")
+     @GetMapping("/list")
+     public MomentResponse<PageImpl<TimingRecordResp>> recordPaginQuery(TimingRecord timingRecord,
+                                                                  @PageableDefault(sort = "finishTime", direction = Sort.Direction.DESC)    Pageable pageRequest){
+         //1.分页参数
+         long current = pageRequest.getPageNumber();
+         long size = pageRequest.getPageSize();
+         //2.分页查询
+         /*把Mybatis的分页对象做封装转换，MP的分页对象上有一些SQL敏感信息，还是通过spring的分页模型来封装数据吧*/
+         com.baomidou.mybatisplus.extension.plugins.pagination.Page<TimingRecordResp> pageResult = timingRecordService.paginQueryByUser(timingRecord, current,size);
+         //3. 分页结果组装
+         List<TimingRecordResp> dataList = pageResult.getRecords();
+         long total = pageResult.getTotal();
+         PageImpl<TimingRecordResp> retPage = new PageImpl<>(dataList,pageRequest,total);
+         return  MomentResponse.ok(retPage);
      }
 }

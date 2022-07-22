@@ -6,6 +6,7 @@ import com.wqy.momento.config.MomentResponse;
 import com.wqy.momento.config.ResultCode;
 import com.wqy.momento.entity.Timing;
 import com.wqy.momento.entity.UserPoint;
+import com.wqy.momento.entity.vo.TimingRecordResp;
 import com.wqy.momento.entity.vo.TimingRecordVO;
 import com.wqy.momento.mapper.TimingMapper;
 import com.wqy.momento.mapper.UserPointMapper;
@@ -182,6 +183,40 @@ public class TimingRecordServiceImpl implements TimingRecordService {
         timingRecord.setPointChange(point);
         timingRecordMapper.insert(timingRecord);
         return MomentResponse.ok("success");
+    }
+
+    @Override
+    public Page<TimingRecordResp> paginQueryByUser(TimingRecord timingRecord, long current, long size) {
+        //1. 构建动态查询条件
+        LambdaQueryWrapper<TimingRecord> queryWrapper = new LambdaQueryWrapper<>();
+        if (StrUtil.isNotBlank(timingRecord.getTenantId())) {
+            queryWrapper.eq(TimingRecord::getTenantId, timingRecord.getTenantId());
+        }
+        if (StrUtil.isNotBlank(timingRecord.getRevision())) {
+            queryWrapper.eq(TimingRecord::getRevision, timingRecord.getRevision());
+        }
+        if (StrUtil.isNotBlank(timingRecord.getCreatedBy())) {
+            queryWrapper.eq(TimingRecord::getCreatedBy, timingRecord.getCreatedBy());
+        }
+        if (StrUtil.isNotBlank(timingRecord.getUpdatedBy())) {
+            queryWrapper.eq(TimingRecord::getUpdatedBy, timingRecord.getUpdatedBy());
+        }
+        if (StrUtil.isNotBlank(timingRecord.getTimingCode())) {
+            queryWrapper.eq(TimingRecord::getTimingCode, timingRecord.getTimingCode());
+        }
+        if (StrUtil.isNotBlank(timingRecord.getDegree())) {
+            queryWrapper.eq(TimingRecord::getDegree, timingRecord.getDegree());
+        }
+        //2. 执行分页查询
+        Page<TimingRecord> pagin = new Page<>(current, size, true);
+        Page<TimingRecordResp> rsPagin = new Page<>(current, size, true);
+        pagin.addOrder(OrderItem.desc("FINISH_TIME"));
+        IPage<TimingRecordResp> selectResult = timingRecordMapper.selectUser(pagin, queryWrapper);
+        rsPagin.setPages(selectResult.getPages());
+        rsPagin.setTotal(selectResult.getTotal());
+        rsPagin.setRecords(selectResult.getRecords());
+        //3. 返回结果
+        return rsPagin;
     }
 
     private boolean checkTiming(TimingRecordVO timingRecord){
