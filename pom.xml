@@ -16,6 +16,8 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>2021.0.3</spring-cloud.version>
+		<dockerfile.maven.version>1.4.13</dockerfile.maven.version>
+		<docker.registry.repository>attachdream</docker.registry.repository>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -104,6 +106,17 @@
 			<artifactId>pinyin4j</artifactId>
 			<version>2.5.1</version>
 		</dependency>
+		<!-- 实现对 Spring Security OAuth2 的自动配置 -->
+		<dependency>
+			<groupId>org.springframework.security.oauth.boot</groupId>
+			<artifactId>spring-security-oauth2-autoconfigure</artifactId>
+			<version>2.1.2.RELEASE</version>
+		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.cloud</groupId>-->
+<!--			<artifactId>spring-cloud-starter-oauth2</artifactId>-->
+<!--			<version>2.2.5.RELEASE</version>-->
+<!--		</dependency>-->
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -129,6 +142,35 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version><!--$NO-MVN-MAN-VER$ -->
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>${dockerfile.maven.version}</version>
+				<executions>
+					<execution>
+						<id>default</id>
+						<goals>
+							<!--如果mvn package时不想用docker打包,就注释掉这个build-->
+							<goal>build</goal>
+							<goal>push</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<repository>${docker.registry.repository}/${project.artifactId}</repository>
+					<tag>${project.version}</tag>
+					<buildArgs>
+						<!--提供参数向Dockerfile传递-->
+						<JAR_FILE>target/momento-0.0.1-SNAPSHOT.jar</JAR_FILE>
+					</buildArgs>
+					<username>attachdream</username>
+					<password>Strive571</password>
 				</configuration>
 			</plugin>
 		</plugins>
