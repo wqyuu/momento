@@ -1,4 +1,4 @@
-package com.wqy.momento.ingram;
+package com.wqy.momento.ingram.tree;
 
 import java.util.Stack;
 
@@ -57,7 +57,7 @@ public class TreeReAndUnRe {
      * 4、循环
      * @param head
      */
-    public static void preOrderUnRecur1(Node head){
+    public static void posOrderUnRecur1(Node head){
         if(head != null){
             Stack<Node> s1 = new Stack<>();
             Stack<Node> s2 = new Stack<>();
@@ -101,7 +101,7 @@ public class TreeReAndUnRe {
     }
 
     /**
-     * 中序
+     * 中序 4251637
      * 左头右
      * 每棵子树，整棵树左边界进栈，依次弹，打印，对弹出节点的右树重复
      */

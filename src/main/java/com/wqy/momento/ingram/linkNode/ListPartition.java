@@ -1,4 +1,4 @@
-package com.wqy.momento.ingram;
+package com.wqy.momento.ingram.linkNode;
 
 /**
  * @Author qywu11

@@ -33,7 +33,7 @@ security:
     resource:
       client-id: clientapp
       user-info-uri: http://127.0.0.1:8002/oauth/authorize # 获取用户的授权码地址
-      token-info-uri: http://127.0.0.1:8002/oauth/check_token  # 获取用户的授权码地址
+      token-info-uri: http://127.0.0.1:8002/oauth/check_token  # 获取用户的授权码验证地址
 
 mybatis-plus:
   mapper-locations: classpath:mapper/**/*.xml

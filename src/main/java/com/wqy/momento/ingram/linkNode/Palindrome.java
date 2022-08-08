@@ -1,4 +1,4 @@
-package com.wqy.momento.ingram;
+package com.wqy.momento.ingram.linkNode;
 
 import java.util.Stack;
 
@@ -6,7 +6,7 @@ import java.util.Stack;
  * @Author qywu11
  * @Date 2022/7/25 9:33
  * @Version 1.0
- * 回文联表
+ * 回文链表
  * 写熟
  */
 public class Palindrome {
