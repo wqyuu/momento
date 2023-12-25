@@ -117,7 +117,35 @@ public class Code06_Manacher {
     }
 
 
+    int maxLcpsLength1(String str){
 
+        int max = Integer.MIN_VALUE;
+        int R = -1;
+        int C = -1;
+        int[] p = new int[str.length()];
+        char[] chars = str.toCharArray();
+
+        for (int i = 0; i < str.length(); i++) {
+
+            p[i] = i < R ? Math.min(R-i,p[2*C - 1]):1;
+
+            while (i + p[i] < str.length() && i - p[i] > -1){
+                if(chars[i + p[i]] == chars[i - p[i]]){
+                    p[i] ++;
+                }else {
+                    break;
+                }
+            }
+
+            if(i + p[i] > R){
+                R = i + p[i];
+                C = i;
+            }
+            max = Math.max(max,p[i]);
+        }
+
+        return max - 1;
+    }
 
 
 

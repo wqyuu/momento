@@ -1,4 +1,4 @@
-package ingram.linkNode;
+package ingram.zuoBase.p6.linkNode;
 
 /**
  * @Author qywu11
@@ -25,6 +25,7 @@ public class IntersectNode {
         // 一个有环链表、一个无环
         return null;
     }
+
 
 
     // 找到链表第一个入环节点，如果无环，返回null
@@ -55,20 +56,22 @@ public class IntersectNode {
         }
         Node cur1 = head1;
         Node cur2 = head2;
-        int n = 0;
+        int n = 0; // n是链表1减链表2的长度
+        // head1 走到结尾节点
         while (cur1.next != null){
             n++;
             cur1 = cur1.next;
         }
+        // head2 走到结尾节点
         while (cur2.next != null){
             n--;
             cur2 = cur2.next;
         }
-        // 判断尾结点是否相等
+        // 判断尾结点是否相等，不相等代表不会相交
         if(cur1 != cur2){
             return null;
         }
-        // 重定位，cur1 = 长链表
+        // 重定位，谁长谁赋值给cur1
         cur1 = n > 0 ? head1 : head2;
         cur2 = cur1 == head1 ? head2 : head1;
         n = Math.abs(n);
@@ -77,7 +80,7 @@ public class IntersectNode {
             n --;
             cur1 = cur1.next;
         }
-        // 长短链表一起走，相遇就是相交节点
+        // 长短链表一起走，相遇就是相交节点,否则到null
         while (cur1 != cur2){
             cur1 = cur1.next;
             cur2 = cur2.next;
@@ -86,10 +89,22 @@ public class IntersectNode {
 
     }
 
+    /**
+     * 两链表有环
+     * 分为3种情况
+     * 1：各自成环 不相交
+     * 2：入环节点相同
+     * 3：入环节点不同
+     * @param head1
+     * @param loop1
+     * @param head2
+     * @param loop2
+     * @return
+     */
     public static Node bothLoop(Node head1,Node loop1,Node head2,Node loop2){
         Node cur1 = null;
         Node cur2 = null;
-        // 入环节点相等
+        // 入环节点相等，
         if(loop1 == loop2){
             cur1 = head1;
             cur2 = head2;

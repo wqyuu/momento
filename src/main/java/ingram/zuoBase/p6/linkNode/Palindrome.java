@@ -1,4 +1,4 @@
-package ingram.linkNode;
+package ingram.zuoBase.p6.linkNode;
 
 import java.util.Stack;
 
@@ -40,6 +40,12 @@ public class Palindrome {
         return true;
     }
 
+    /**
+     * 是否回文链表
+     * 双指针实现 空间O(1)
+     * @param head
+     * @return
+     */
     public static boolean isPalindrome3(Node head){
         if(head == null || head.next == null){
             return true;
@@ -47,13 +53,17 @@ public class Palindrome {
         Node n1 = head;
         Node n2 = head;
         while (n1.next != null && n2.next != null){
-            n1 = n1.next;
-            n2 = n2.next.next;
-        }// 1 2 3 2 1    n1 = 321  n2= 1
+            n1 = n1.next; // 慢指针一次走一步
+            n2 = n2.next.next; // 快指针一次走两步
+        }
+        // while结束后n1走到链表中点位置
+        // 1 2 3 2 1    n1 = 321  n2= 1
         n2 = n1.next;
-        n1.next = null; // 取中点位置
+        n1.next = null; // 取中点位置 指向null
         Node n3 = null;
         // 翻转n2 赋值给n1
+        // 1 -> 2 -> 3 -> 4 <- 3 <- 2    1
+        // n2                       n1   n3
         while (n2 != null){
             n3 = n2.next;
             n2.next = n1;
@@ -71,8 +81,11 @@ public class Palindrome {
             n1 = n1.next;
             n2 = n2.next;
         }
+        // 还原链表
         n1 = n3.next;
         n3.next = null;
+        // 1 -> 2 -> 3 ->   null  4->3-> 2 ->  1
+        //                   n1  n3
         while (n1 != null){
             n2 = n1.next;
             n1.next = n3;
@@ -102,7 +115,7 @@ public class Palindrome {
         if(head == null || head.next == null){
             return true;
         }
-        Node n1  = head;
+        Node n1 = head;
         Node n2 = head;
         while (n1.next != null && n2.next != null){
             n1 = n1.next;

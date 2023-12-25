@@ -1,4 +1,4 @@
-package ingram.linkNode;
+package ingram.zuoBase.p6.linkNode;
 
 import java.util.HashMap;
 
@@ -61,9 +61,11 @@ public class CopyListWithRand {
         // 分离出新链表
         while (cur != null){
             next = cur.next.next;
+
             curCopy = cur.next;
             cur.next = next; // 跳过复制节点
             curCopy.next = next != null ? next.next : null;
+
             cur = next;  // 向后走
         }
         return res;

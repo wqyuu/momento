@@ -45,10 +45,10 @@ public class Code05_Kmp {
         while (i1 < str1.length && i2 < str2.length){
             if(str1[i1] == str2[i2]){
                 i1 ++;
-                i2 ++; // 相当于移动父串
+                i2 ++;
             }else if(next[i2] == -1){
-                i1 ++; // 相当于移动子串
-            }else {
+                i1 ++; // 相当于移动父串
+            }else {// 相当于移动子串
                 i2 = next[i2]; // 相当于移动子串到next[i2]位置
             }
         }
@@ -80,7 +80,7 @@ public class Code05_Kmp {
 //                cn ++;
                 next[i ++] = ++ cn;
             }else if(cn > 0){ // i-1位置的值不等于cn位置值，且cn是大于0的继续像前面找next中的前缀，和i-1位置值进行对比
-                cn = next[cn];
+                cn = next[cn]; // 往前跳，看等不等于上个位置
             }else { // cn不大于0,说明找到最前面也没找到跟i-1这个后缀一样的，设置next=0,继续下一个i
                 next[i++] = 0;
             }
@@ -90,7 +90,9 @@ public class Code05_Kmp {
 
     public static void main(String[] args) {
         int index = getIndexOf("acsbcsaacsbcssaa","csbcss");
+        int kmp = kmp("acsbcsaacsbcssaa","csbcss");
         System.out.println(index);
+        System.out.println(kmp);
     }
 
 
@@ -129,4 +131,72 @@ public class Code05_Kmp {
         }
         return next;
     }
+
+
+
+    public static int[] getNext1(char[] str2){
+        if(str2.length <= 1){
+            return new int[]{-1};
+        }
+        int[] next = new int[str2.length];
+        next[0] = -1;
+        next[1] = 0;
+        int cn = 0;
+        int i = 2;
+        while (i < str2.length){
+
+            if(str2[i - 1] == str2[cn]){
+                next[i ++] = ++ cn;
+            }else if(next[cn]!=-1){
+                cn = next[cn];
+            }else {
+                next[i ++] = cn;
+            }
+        }
+        return next;
+    }
+    public static int kmp1(String s1, String s2){
+        char[] char1 = s1.toCharArray();
+        char[] char2 = s2.toCharArray();
+
+        int[] next = getNext1(char2);
+
+        int i1 = 0;
+        int i2 = 0;
+
+        while (i1 < char1.length && i2 < char2.length){
+            if(char1[i1] == char2[i2]){
+                i1 ++;
+                i2 ++;
+            }else if(next[i2] != -1){
+                i2 = next[i2];
+            }else{
+                i1 ++;
+            }
+        }
+
+        return i2 == s2.length() ? i1 - i2 : -1;
+    }
+
+    public static int[] getNext20230530(char[] str2){
+        if(str2.length <= 1){
+            return new int[]{-1};
+        }
+        int[] nextArr = new int[str2.length];
+        nextArr[0] = -1;
+        nextArr[1] = 0;
+        int c = 0;
+        int i = 2;
+        while (i < str2.length){
+            if(str2[i] == str2[c]){
+                nextArr[i ++] = ++ c;
+            }else if(nextArr[c] != -1){
+                c = nextArr[c];
+            }else {
+                nextArr[i ++] = c;
+            }
+        }
+        return nextArr;
+    }
+
 }

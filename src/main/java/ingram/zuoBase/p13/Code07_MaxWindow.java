@@ -1,5 +1,7 @@
 package ingram.zuoBase.p13;
 
+import io.swagger.models.auth.In;
+
 import java.util.LinkedList;
 
 /**
@@ -51,7 +53,7 @@ public class Code07_MaxWindow {
             while ( !qMax.isEmpty() && qMax.peekLast() < arr[R]){
                 qMax.pollLast();
             }
-            qMax.addLast(arr[R]);
+            qMax.addLast(R);
             R ++;
         }
 
@@ -71,8 +73,11 @@ public class Code07_MaxWindow {
             }
             return null;
         }
+
+
     }
 
+    // O(1) 每个点只进出一次
     public static int[] getMaxWindow(int[] arr,int w){
         if( arr == null || w < 1 || arr.length < w){
             return null;
@@ -81,7 +86,7 @@ public class Code07_MaxWindow {
         int[] res = new int[arr.length - w + 1];
         int index = 0;
         for (int i = 0; i < arr.length; i++) {
-            // 窗口 R向右移动，弹出所有小于新数字的值
+            // 窗口 R向右移动，弹出所有小于新数字的值，因为后进入数字比前面晚弹出且数字大于等于前面数字，所以局部最大值为新加入数字
             while (!qMax.isEmpty() && arr[qMax.peekLast()] <= arr[i]){
                 qMax.pollLast();
             }
@@ -104,8 +109,119 @@ public class Code07_MaxWindow {
         int[] arr = new int[]{3,7,9,1,7,3,1,2};
         int[] res = getMaxWindow(arr,3);
         for (int i = 0; i < res.length; i++) {
-            System.out.println(res[i]);
+            System.out.print(res[i]+",");
         }
+
+        System.out.println("------------ res20230530 ------------ ");
+        int[] res20230530 =getMaxWindow20230530(arr,3);
+        for (int i = 0; i < res20230530.length; i++) {
+            System.out.print(res20230530[i]+",");
+        }
+    }
+
+
+
+
+
+    public static int[] getMaxWindow20230526(int[] arr,int w){
+        LinkedList<Integer> qMax = new LinkedList<>();
+        int[] res = new int[arr.length - w + 1];
+        int index = 0;
+        // [ 1,2,8,5,3,6]
+        for (int i = 0; i < arr.length; i++) {
+            while (!qMax.isEmpty() && arr[i] >= arr[qMax.peekLast()]){
+                qMax.pollLast();
+            }
+            qMax.addLast(i);
+            if(i - w == qMax.peekFirst()){
+                qMax.pollFirst();
+            }
+            if(i >= w - 1){
+                res[index ++] = arr[qMax.peekFirst()];
+            }
+        }
+
+        return res;
+    }
+
+    public static int[] getMaxWindowUseClass(int[] arr,int w){
+
+        int[] res = new int[arr.length - w + 1];
+        WindowMax wm = new WindowMax(arr);
+        int index = 0;
+        for (int i = 0; i < arr.length; i++) {
+            wm.addNumFromRight();
+            if(!wm.qMax.isEmpty() && wm.qMax.peekLast() <= arr[i]){
+                wm.addNumFromRight();
+            }
+            // 左侧过窗口，弹出左边首个数字
+            if(!wm.qMax.isEmpty() && w == i - wm.qMax.peekFirst()){
+                wm.removeNumFromLeft();
+            }
+            // 位置大于窗口后，记录每个窗口最大数字到res中
+            if(!wm.qMax.isEmpty() && i >= w - 1){
+                res[index ++] = wm.getMax();
+            }
+
+        }
+
+        return res;
+    }
+
+    public static int[] getMaxWindow20230530(int[] arr,int w){
+        if(null == arr || w < 1 || arr.length < w ){
+            return null;
+        }
+        int[] res = new int[arr.length - w + 1];
+        int index = 0;
+        LinkedList<Integer> qMax = new LinkedList<>();
+
+        for (int i = 0; i < arr.length; i++) {
+
+            while (!qMax.isEmpty() && arr[qMax.peekLast()] <= arr[i]){
+                qMax.pollLast();
+            }
+            qMax.addLast(i);
+
+            if(w == i - qMax.peekFirst()){
+                qMax.pollFirst();
+            }
+
+            if(i >= w - 1){
+                res[index ++] = arr[qMax.peekFirst()];
+            }
+
+        }
+        return res;
+    }
+
+    public static int[] getMaxWin20230703(int[] arr,int w){
+        if(arr == null || w < 1 || w > arr.length){
+            return null;
+        }
+
+        int[] res = new int[arr.length - w];
+        int index = 0;
+        LinkedList<Integer> qMax = new LinkedList<>();
+        for (int i = 0; i < arr.length; i++) {
+
+            while (!qMax.isEmpty() && arr[qMax.peekLast()] <= arr[i]){
+                qMax.pollLast();
+            }
+
+            qMax.addLast(i);
+
+            if(i - w == qMax.peekFirst()){
+                qMax.pollFirst();
+            }
+
+            if(i >= w - 1){
+                res[index ++] = arr[qMax.peekFirst()];
+            }
+
+        }
+
+        return res;
     }
 
 }

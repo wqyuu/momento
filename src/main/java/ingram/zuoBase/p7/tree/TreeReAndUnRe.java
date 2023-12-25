@@ -1,4 +1,4 @@
-package ingram.tree;
+package ingram.zuoBase.p7.tree;
 
 import java.util.Stack;
 
@@ -144,11 +144,17 @@ public class TreeReAndUnRe {
 
     public static void main(String[] args) {
 
-        Node a = new Node(2);
-        Node al1 = new Node(1);
-        Node ar1 = new Node(3);
+        Node a = new Node(10);
+        Node al1 = new Node(5);
+        Node ar1 = new Node(6);
+        Node al2 = new Node(4);
+        Node ar2 = new Node(2);
+        Node al3 = new Node(3);
         a.left = al1;
         a.right = ar1;
+        al1.left = al2;
+        al1.right = ar2;
+        al2.left = al3;
         inOrderUnRecur(a);
     }
 

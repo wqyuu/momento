@@ -16,11 +16,11 @@ public class Problem03_MagicOP {
     public static int maxOps(int[] arr1,int[] arr2){
         double sum1 = 0;
         for (int i = 0; i < arr1.length; i++) {
-            sum1 = (double) arr1[i];
+            sum1 += (double) arr1[i];
         }
         double sum2 = 0;
         for (int i = 0; i < arr2.length; i++) {
-            sum2 = (double) arr2[i];
+            sum2 += (double) arr2[i];
         }
 
         if(avg(sum1,arr1.length) == avg(sum2,arr2.length)){

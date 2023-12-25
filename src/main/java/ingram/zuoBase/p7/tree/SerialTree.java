@@ -1,4 +1,4 @@
-package ingram.tree;
+package ingram.zuoBase.p7.tree;
 
 import java.util.LinkedList;
 import java.util.Queue;

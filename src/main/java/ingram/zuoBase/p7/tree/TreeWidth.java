@@ -1,6 +1,4 @@
-package ingram.tree;
-
-import io.swagger.models.auth.In;
+package ingram.zuoBase.p7.tree;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -62,6 +60,19 @@ public class TreeWidth {
         int curLevel = 1;
         int curLevelNodes = 0;
         int max = Integer.MIN_VALUE;
+        /**
+         *
+         *               a
+         *             b   c
+         *           d  e f  g
+         *
+         *           curLevel = 1 , curLevelNodes = 0   Q[a]   Map{a:1,}
+         *           curLevel = 1 , curLevelNodes = 1   Q[b,c]   Map{a:1,b:2,c:2}
+         *           curLevel = 2 , curLevelNodes = 1 ,max = 1,  Q[c,d,e]   Map{a:1,b:2,c:2,d:3,e:3}
+         *           curLevel = 2 , curLevelNodes = 2 ,max = 1,  Q[d,e,f,g]   Map{a:1,b:2,c:2,d:3,e:3,f:3,g:3}
+         *           curLevel = 3 , curLevelNodes = 1 ,max = 2,  Q[e,f,g]   Map{a:1,b:2,c:2,d:3,e:3,f:3,g:3}
+         *
+         */
         while (!queue.isEmpty()){
             Node cur = queue.poll();
             int curNodeLevel = levelMap.get(cur);
@@ -85,17 +96,6 @@ public class TreeWidth {
         }
         return max;
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

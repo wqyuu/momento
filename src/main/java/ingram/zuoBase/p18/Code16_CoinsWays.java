@@ -50,6 +50,7 @@ public class Code16_CoinsWays {
         return dp[0][aim];
     }
 
+    // 根据二维表 推位置依赖
     public static int way3(int[] arr,int aim){
         if(arr == null || arr.length == 0){
             return 0;

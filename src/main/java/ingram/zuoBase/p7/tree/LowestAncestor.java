@@ -1,4 +1,4 @@
-package ingram.tree;
+package ingram.zuoBase.p7.tree;
 
 /**
  * @Author qywu11

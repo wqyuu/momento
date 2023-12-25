@@ -1,4 +1,4 @@
-package ingram.linkNode;
+package ingram.zuoBase.p6.linkNode;
 
 public  class Node{
         public int value;
