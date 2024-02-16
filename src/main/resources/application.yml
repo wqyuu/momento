@@ -1,0 +1,42 @@
+server:
+  port: 8000
+#  servlet:
+#    session:
+#      cookie:
+#        name: SSO-SESSIONID
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    druid:
+      url: jdbc:mysql://localhost:32306/memory?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useSSL=false
+      username: root
+      password: 123456
+
+#  security.oauth2.client.client-id=webapp
+#  security.oauth2.client.client-secret=secret
+#  security.oauth2.client.access-token-uri=http://localhost:8110/oauth/token
+#  security.oauth2.client.user-authorization-uri=http://localhost:8110/oauth/authorize
+#  security.oauth2.resource.user-info-uri=http://localhost:8110/oauth/user
+
+security:
+  oauth2:
+    # OAuth2 Client 配置，对应 OAuth2ClientProperties 类
+    client:
+      client-id: clientapp
+      client-secret: 123456
+      user-authorization-uri: http://127.0.0.1:8002/oauth/authorize # 获取用户的授权码地址
+      access-token-uri: http://127.0.0.1:8002/oauth/token # 获取访问令牌的地址
+    # OAuth2 Resource 配置，对应 ResourceServerProperties 类
+    resource:
+      client-id: clientapp
+      user-info-uri: http://127.0.0.1:8002/oauth/authorize # 获取用户的授权码地址
+      token-info-uri: http://127.0.0.1:8002/oauth/check_token  # 获取用户的授权码验证地址
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  typeAliasesPackage: com.wqy.momento.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
